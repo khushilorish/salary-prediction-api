@@ -142,11 +142,10 @@ salary-prediction-api/
 ### How to Run This Project Locally
 
  1. Clone the Repository
+    - git clone https://github.com/khushilorish/salary-prediction-api.git
+    - cd salary-prediction-api
 
-git clone https://github.com/khushilorish/salary-prediction-api.git
-cd salary-prediction-api
-
-2. Create a Virtual Environment (Optional)
+3. Create a Virtual Environment (Optional)
 
 python -m venv venv
 
