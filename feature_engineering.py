@@ -44,6 +44,6 @@ class FeatureEngineering(BaseEstimator, TransformerMixin):
         x["comp_size_loc"] = (x["loc_level"] + x["comp"])
 
         # remove temporary columns
-        x.drop(columns=["loc_level","comp","education_year"], axis=1, inplace=True)
+        x.drop(columns=["loc_level","comp","education_year"], inplace=True)
 
         return x
