@@ -1,35 +1,39 @@
 # Salary Prediction API
 
-An end-to-end Machine Learning project that predicts employee salaries based on education, experience, skills, certifications, job role, industry, company size, and location.
+A Machine Learning API that predicts employee salaries based on professional, educational, and company-related information.
 
-## Project Overview
+The project is built using FastAPI and Scikit-Learn and deployed on Hugging Face Spaces using Docker.
 
-This project demonstrates the complete Machine Learning lifecycle, from data preprocessing and feature engineering to model deployment through a FastAPI REST API.
+---
 
-The system accepts candidate information and returns a predicted salary using a trained Random Forest Regression model.
+## Project Objective
 
-## Key Highlights
+Salary estimation is an important problem for both job seekers and employers.
 
-- Performed Exploratory Data Analysis (EDA)
-- Created custom engineered features to improve model performance
-- Built reusable preprocessing and feature engineering pipelines
-- Compared Linear Regression and Random Forest Regression models
-- Evaluated models using R² Score, MAE, and Cross Validation
-- Selected Random Forest as the final model
-- Serialized the complete pipeline using Joblib
-- Developed a FastAPI application for real-time predictions
-- Generated interactive API documentation using Swagger UI
+This project uses Machine Learning to estimate a person's salary based on factors such as:
 
-## Tech Stack
+- Job Title
+- Industry
+- Location
+- Remote Work Status
+- Education Level
+- Company Size
+- Years of Experience
+- Number of Skills
+- Certifications
+
+The trained model is exposed through a REST API so predictions can be accessed from any application.
+
+---
+
+## Technologies Used
 
 ### Machine Learning
 
-- Python
+- Scikit-Learn
 - Pandas
 - NumPy
-- seaborn
-- matplotlib
-- Scikit-Learn
+- Joblib
 
 ### API Development
 
@@ -37,80 +41,12 @@ The system accepts candidate information and returns a predicted salary using a 
 - Pydantic
 - Uvicorn
 
-### Model Serialization
+### Deployment
 
-- Joblib
+- Docker
+- Hugging Face Spaces
 
-## Machine Learning Workflow
-
-```text
-Raw Data
-    ↓
-Feature Engineering
-    ↓
-Encoding & Preprocessing
-    ↓
-Model Training
-    ↓
-Model Evaluation
-    ↓
-Pipeline Serialization
-    ↓
-FastAPI Deployment
-```
-
-## Feature Engineering
-
-Implemented custom feature engineering including:
-
-- Total Experience
-- Education Level Mapping
-- Company Size Mapping
-- Location Mapping
-- Company-Location Composite Features
-
-The feature engineering logic is integrated directly into the machine learning pipeline to ensure consistent behavior during both training and inference.
-
-## Model Selection
-
-### Models Evaluated
-
-- Linear Regression
-- Random Forest Regression
-
-### Final Model
-
-**Random Forest Regression** was selected as the final model based on superior predictive performance.
-
-## API Endpoint
-
-### Predict Salary
-
-**POST** `/predict`
-
-#### Sample Request
-
-```json
-{
-  "job_title": "AI Engineer",
-  "industry": "Health",
-  "location": "India",
-  "remote_work": "yes",
-  "education_level": "Bachelor",
-  "company_size": "Small",
-  "experience_years": 5,
-  "skills_count": 8,
-  "certifications": 3
-}
-```
-
-#### Sample Response
-
-```json
-{
-  "predicted_salary": 79620.5
-}
-```
+---
 
 ## Project Structure
 
@@ -120,107 +56,234 @@ salary-prediction-api/
 ├── app.py
 ├── feature_engineering.py
 ├── salary_prediction_pipeline.pkl
-├── Salary_Prediction.ipynb
 ├── requirements.txt
-└── README.md
+├── Dockerfile
+├── code.ipynb
+├── README.md
+└── LICENSE
 ```
 
-## Skills Demonstrated
+### File Description
 
-- Data Analysis
-- Exploratory Data Analysis (EDA)
-- Feature Engineering
-- Machine Learning Pipelines
-- Model Evaluation
-- Random Forest Regression
-- API Development with FastAPI
-- Model Serialization using Joblib
-- Production-Oriented Machine Learning Workflow
+| File | Purpose |
+|--------|---------|
+| app.py | Main FastAPI application |
+| feature_engineering.py | Custom feature engineering logic |
+| salary_prediction_pipeline.pkl | Trained machine learning pipeline |
+| requirements.txt | Python dependencies |
+| Dockerfile | Docker deployment configuration |
+| code.ipynb | Model development notebook |
 
-## Running the Project
+---
 
-### How to Run This Project Locally
+## How the System Works
 
- 1. Clone the Repository
-    - git clone https://github.com/khushilorish/salary-prediction-api.git
-    - cd salary-prediction-api
+```text
+User Input
+     ↓
+FastAPI Endpoint
+     ↓
+Feature Engineering
+     ↓
+Machine Learning Pipeline
+     ↓
+Salary Prediction
+     ↓
+JSON Response
+```
 
-3. Create a Virtual Environment (Optional)
+---
 
+## API Endpoints
+
+### Home Endpoint
+
+```http
+GET /
+```
+
+Response:
+
+```json
+{
+    "message": "Salary Prediction API is running"
+}
+```
+
+---
+
+### Prediction Endpoint
+
+```http
+POST /predict
+```
+
+Request Example:
+
+```json
+{
+  "job_title": "AI Engineer",
+  "industry": "Technology",
+  "location": "USA",
+  "remote_work": "Yes",
+  "education_level": "Master",
+  "company_size": "Large",
+  "experience_years": 5,
+  "skills_count": 10,
+  "certifications": 3
+}
+```
+
+Response Example:
+
+```json
+{
+  "predicted_salary": 125000.45
+}
+```
+
+---
+
+# Using the Deployed API
+
+You can use the deployed version directly without downloading the repository.
+
+Open:
+
+https://khushilorish-salary-prediction-api.hf.space/docs
+
+Steps:
+
+1. Open the Swagger documentation.
+2. Expand the `/predict` endpoint.
+3. Click **Try it out**.
+4. Enter sample JSON data.
+5. Click **Execute**.
+6. View the predicted salary in the response.
+
+---
+
+# Run the Project Locally
+
+## Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/khushilorish/salary-prediction-api.git
+```
+
+Move into the project directory:
+
+```bash
+cd salary-prediction-api
+```
+
+---
+
+## Step 2: Create Virtual Environment
+
+Windows:
+
+```bash
 python -m venv venv
+```
 
-Activate the environment:
+Activate:
 
-# Windows
-
+```bash
 venv\Scripts\activate
+```
 
-# Mac/Linux
+Linux / Mac:
+
+```bash
+python3 -m venv venv
 
 source venv/bin/activate
+```
 
-3. Install Required Dependencies
+---
 
+## Step 3: Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-4. Start the FastAPI Server
+---
 
+## Step 4: Start FastAPI Server
+
+```bash
 uvicorn app:app --reload
+```
 
 You should see output similar to:
 
-INFO: Application startup complete.
-INFO: Uvicorn running on http://127.0.0.1:8000
+```text
+Uvicorn running on http://127.0.0.1:8000
+```
 
-5. Open API Documentation
+---
 
-Open your browser and visit:
+## Step 5: Open API Documentation
 
+Visit:
+
+```text
 http://127.0.0.1:8000/docs
+```
 
-Swagger UI will open automatically, allowing you to test the API directly from your browser.
+You can now test the API locally.
 
-6. Test Salary Prediction
+---
 
-Expand the POST /predict endpoint.
+# Run with Docker
 
-Click Try it out and provide sample input:
+Build Docker Image:
 
-{
-  "job_title": "AI Engineer",
-  "industry": "Health",
-  "location": "India",
-  "remote_work": "yes",
-  "education_level": "Bachelor",
-  "company_size": "Small",
-  "experience_years": 5,
-  "skills_count": 8,
-  "certifications": 3
-}
+```bash
+docker build -t salary-prediction-api .
+```
 
-Click Execute to receive a salary prediction.
+Run Container:
 
-# Key Learning 
+```bash
+docker run -p 7860:7860 salary-prediction-api
+```
 
-Through this project, I gained hands-on experience with:
+Open:
 
-- End-to-end Machine Learning workflows
+```text
+http://localhost:7860/docs
+```
 
-- Custom feature engineering using Scikit-Learn transformers
+---
 
-- Building reusable ML pipelines
+# Example Use Cases
 
-- Model evaluation and selection
+- HR Analytics
+- Salary Benchmarking
+- Recruitment Platforms
+- Career Guidance Systems
+- Compensation Analysis
+- Educational Projects
+- Machine Learning API Learning
 
-- Model serialization using Joblib
+---
 
-- REST API development with FastAPI
+# Repository
 
-- Request validation using Pydantic
+GitHub Repository:
 
-- API testing with Swagger UI
+https://github.com/khushilorish/salary-prediction-api
 
-- Deploying machine learning models for real-world usage
+---
 
-# License
-This project is licensed under the MIT License
+# Live Demo
+
+https://khushilorish-salary-prediction-api.hf.space/docs
+
+---
+
+GitHub:
+https://github.com/khushilorish
